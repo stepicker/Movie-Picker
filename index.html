@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <!-- Setting page title -->
+  <title>Movie Wish List</title>
+
+  <!-- Establishing character set -->
+  <meta charset="UTF-8">
+
+  <!-- Linking CSS -->
+  <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+  <!-- Linking Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+
+  <!-- Linking jQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Linking Sweet Alert script -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="main-container">
+
+    <div id="search-container">
+
+        <div id="add-movie" class="animated fadeInDown">
+            <form id="movie-form">
+                <label for="movie-input">Search a movie:</label>
+                <input type="text" id="movie-input">
+                <input id="search-movie" type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div id="results-div"></div>
+
+    </div>
+
+    <div id="wishlist-container" class="animated fadeInRight"></div>
+
+</div>
+
+<div id="video-player"></div>
+
+<div id="video-background" class="close-trailer"></div>
+
+<!-- Linking scripts -->
+<script type="text/javascript" src="./assets/javascript/app.js"></script>
+
+</body>
+
+</html>
