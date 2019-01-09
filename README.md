@@ -8,4 +8,4 @@ Personal project, leveraging:
 
 ## Ready to try it?
 
-Link coming soon...
+Go to http://movies.picker.it
