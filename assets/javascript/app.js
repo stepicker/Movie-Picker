@@ -68,36 +68,49 @@ $("#search-movie").on("click", function(event) {
 
     var movie = $("#movie-input").val().trim();
 
-    // Use the OMDb API to get results
-    var OMDBqueryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=" + keys.OMDb;
+    // Validate input
+    if (movie == "") {
+        swal({
+            title: "No input",
+            text: "Please write something in the search box",
+            icon: "error",
+            });
+    }
 
-    $.ajax({
-        url: OMDBqueryURL,
-        method: "GET"
-      }).then(function(response) {
-  
-        console.log(response);
-        
-        $("#results-div").empty();
+    else {
 
-        var maxResults;
+        // Use the OMDb API to get results
+        var OMDBqueryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=" + keys.OMDb;
 
-        if (response.Search.length > 5) {
-            maxResults = 5;
-        }
+        $.ajax({
+            url: OMDBqueryURL,
+            method: "GET"
+        }).then(function(response) {
+    
+            console.log(response);
+            
+            $("#results-div").empty();
 
-        else {
-            maxResults = response.Search.length;
-        }
+            var maxResults;
 
-        for (i = 0; i < maxResults; i++) {
+            if (response.Search.length > 5) {
+                maxResults = 5;
+            }
 
-            // Populate the web page with results
-            $("#results-div").append("<div class='results animated fadeInLeft'><img class='result-img' src='" + response.Search[i].Poster + "'><div class='movie-info'><h2>" + response.Search[i].Title + "</h2><h3>Year: " + response.Search[i].Year + "</h3><a href='#' class='watch-trailer' id='" + response.Search[i].imdbID + "' data-title='" + response.Search[i].Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.Search[i].imdbID + "' target='_blank'>Open on IMDb</a><button type='button' class='add-button' data-title='" + response.Search[i].Title + "' data-poster='" + response.Search[i].Poster + "' data-IMDb='" + response.Search[i].imdbID + "'>Add to Wish List</button></div></div>");
+            else {
+                maxResults = response.Search.length;
+            }
 
-        }
+            for (i = 0; i < maxResults; i++) {
 
-      });
+                // Populate the web page with results
+                $("#results-div").append("<div class='results animated fadeInLeft'><img class='result-img' src='" + response.Search[i].Poster + "'><div class='movie-info'><h2>" + response.Search[i].Title + "</h2><h3>Year: " + response.Search[i].Year + "</h3><a href='#' class='watch-trailer' id='" + response.Search[i].imdbID + "' data-title='" + response.Search[i].Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.Search[i].imdbID + "' target='_blank'>Open on IMDb</a><button type='button' class='add-button' data-title='" + response.Search[i].Title + "' data-poster='" + response.Search[i].Poster + "' data-IMDb='" + response.Search[i].imdbID + "'>Add to Wish List</button></div></div>");
+
+            }
+
+        });
+
+    }
 
   });
 
