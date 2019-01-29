@@ -1,4 +1,4 @@
-# Movie-Wish-List v2
+# Movie Picker
 
 Personal project, leveraging:
 
