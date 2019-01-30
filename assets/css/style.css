@@ -48,8 +48,7 @@ a {
 
 #movie-form {
     width: 400px;
-    display: flex;
-    align-items: center;
+    position: relative;
 }
 
 #results-div {
@@ -60,11 +59,17 @@ a {
 }
 
 #movie-input {
-    width: 300px;
-    padding: 7px;
+    width: 370px;
+    padding: 8px;
     margin: 5px;
-    border: 2px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 5px
+}
+
+#search-movie {
+    position: absolute;
+    top: 5px;
+    right: 0;
 }
 
 #search-movie, .add-button, .checkbox, #close-button {
@@ -88,7 +93,7 @@ a {
     height: 398px;
     display: flex;
     flex-wrap: wrap;
-    margin: 10px;
+    margin: 30px;
 }
 
 .result-img {
@@ -117,7 +122,7 @@ a {
 }
 
 .results:hover .movie-info {
-    opacity: 0.8;
+    opacity: 0.9;
     transition: .5s ease;
     z-index: 6;
 }
