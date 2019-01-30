@@ -189,6 +189,7 @@ $(document).on("click", ".add-button", function(){
   });
 
   $("#wishlist-container").show();
+  $("#wishlist-toggle").hide();
 
 });
 
@@ -240,10 +241,13 @@ $(document).on("click", ".movie-wish", function() {
 
 $(document).on("click", "#home", function() {
     $("#results-div").empty();
+    $("#wishlist-container").hide();
+    $("#wishlist-toggle").show();
 });
 
 $(document).on("click", "#wishlist-toggle", function() {
-    $("#wishlist-container").toggle();
+    $("#wishlist-container").show();
+    $("#wishlist-toggle").hide();
 });
 
 setTimeout(function() {
