@@ -5,7 +5,7 @@
 <head>
 
   <!-- Setting page title -->
-  <title>Movie Wish List</title>
+  <title>Movie Picker</title>
 
   <!-- Establishing character set -->
   <meta charset="UTF-8">
@@ -15,8 +15,9 @@
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
-  <!-- Linking Google font -->
+  <!-- Linking font and icons -->
   <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <!-- Linking jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -24,26 +25,32 @@
   <!-- Linking Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
 
-  <!-- Linking Sweet Alert script -->
+  <!-- Linking Sweet Alert scripts -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
 <body>
 
+<div id="background-transparency"></div>
+
 <div id="main-container">
 
     <div id="search-container">
 
-        <div id="add-movie" class="animated fadeInDown">
+        <div id="add-movie" class="animated fadeIn">
             <form id="movie-form">
-                <label for="movie-input">Search a movie:</label>
-                <input type="text" id="movie-input">
-                <input id="search-movie" type="submit" value="Submit">
+                <input type="text" id="movie-input" placeholder="Type a movie title">
+                <button id="search-movie" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
             </form>
         </div>
 
         <div id="results-div"></div>
+
+        <div id="home"><img src="./assets/images/home.png" class="animated fadeIn"></div>
+        <div id="wishlist-toggle"><img src="./assets/images/wishlist.png" class="animated tada"></div>
 
     </div>
 
@@ -54,6 +61,8 @@
 <div id="video-player"></div>
 
 <div id="video-background" class="close-trailer"></div>
+
+<div id="footer-note"><a href="http://www.freepik.com/" target="_blank">Background by Freepik</a></div>
 
 <!-- Linking scripts -->
 <script type="text/javascript" src="./assets/javascript/app.js"></script>

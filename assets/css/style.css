@@ -1,5 +1,21 @@
 body {
+    background: url("../images/bg1.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     font-family: 'Chewy', cursive;
+    color: white;
+}
+
+#background-transparency {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #008CBA;
+    opacity: 0.4;
 }
 
 h1 {
@@ -7,11 +23,11 @@ h1 {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 a {
@@ -20,46 +36,94 @@ a {
 }
 
 #search-container {
-    margin: 10px 0 10px 20px;
+    margin: 10px auto 10px auto;
+    position: relative;
+}
+
+#add-movie {
+    margin: 10px auto 10px auto;
+    display: flex;
+    justify-content: center;
 }
 
 #movie-form {
+    width: 400px;
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-bottom: 30px;
+    align-items: center;
+}
+
+#results-div {
+    flex: 5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #movie-input {
-    margin: 10px 0 10px 0;
+    width: 300px;
+    padding: 7px;
+    margin: 5px;
+    border: 2px solid lightgray;
+    border-radius: 5px
 }
 
 #search-movie, .add-button, .checkbox, #close-button {
-    padding: 2px 10px 2px 10px;
+    padding: 5px 10px;
     background-color: #008CBA;
     color: white;
     font-family: 'Chewy', cursive;
     font-size: 12pt;
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkbox, #close-button {
+    cursor: default;
 }
 
 .results {
+    position: relative;
+    width: 250px;
+    height: 398px;
     display: flex;
     flex-wrap: wrap;
+    margin: 10px;
 }
 
 .result-img {
-    height: 250px;
-    margin: 10px 10px 10px 0;
+    width: 250px;
+    height: 398px;
+    z-index: 5;
+    -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(255,255,255,0); 
+    box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(255,255,255,0);
 }
 
 .movie-info {
-    height: 150px;
-    margin-top: 10px;
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    height: 200px;
+    width: 200px;
+    padding: 50px 10px;
+    background-color: black;
+    border-radius: 20px;
+    opacity: 0;
+    z-index: 4;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.results:hover .movie-info {
+    opacity: 0.8;
+    transition: .5s ease;
+    z-index: 6;
+}
+
+.watch-trailer {
+    cursor: pointer;
 }
 
 .add-button {
@@ -81,21 +145,21 @@ a {
 }
 
 #wishlist-container {
-    flex: 2;
-    background-image: url("../images/linedpaper.png");
+    flex: 1;
+    background-image: url("../images/darkmosaic.png");
     border-left: 2px solid lightgray;
     border-bottom: 2px solid lightgray;
     padding: 10px;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    position: sticky;
-    top: 0;
 }
 
 .movie-wish {
     height: 250px;
     width: 170px;
+    -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(255,255,255,0); 
+    box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(255,255,255,0);
 }
 
 .checkbox {
@@ -130,4 +194,26 @@ a {
     position: absolute;
     top: -30px;
     right: 0;
+}
+
+#home {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+}
+
+#wishlist-toggle {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    cursor: pointer;
+}
+
+#footer-note {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-style: italic;
+    font-size: 10pt;
 }

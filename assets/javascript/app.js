@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
-// Hide the video player and its background on page load
+// Hide some divs on page load
 $("#video-player").hide();
 $("#video-background").hide();
+$("#wishlist-container").hide();
+
 
 // GLOBAL VARIABLES
 // ==================================================
@@ -52,7 +54,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref(currentUser).on("child_added", function(snapshot) {
         var sv = snapshot.val();
         console.log(sv);           
-        $("#wishlist-container").prepend("<div class='wishlist animated fadeIn'><a href='#'><img class='movie-wish' src='" + sv.poster + "' alt='" + sv.title + "' data-IMDb='" + sv.IMDb + "'></a><button class='checkbox' data-db-id='" + snapshot.key + "'>✓</button>"); 
+        $("#wishlist-container").prepend("<div class='wishlist animated fadeIn'><a href='#'><img class='movie-wish' src='" + sv.poster + "' alt='" + sv.title + "' data-IMDb='" + sv.IMDb + "'></a><button class='checkbox' data-db-id='" + snapshot.key + "'><i class='fas fa-check'></i></button>"); 
     });
 
 });
@@ -93,8 +95,8 @@ $("#search-movie").on("click", function(event) {
 
             var maxResults;
 
-            if (response.Search.length > 5) {
-                maxResults = 5;
+            if (response.Search.length > 10) {
+                maxResults = 10;
             }
 
             else {
@@ -103,8 +105,12 @@ $("#search-movie").on("click", function(event) {
 
             for (i = 0; i < maxResults; i++) {
 
+                if (response.Search[i].Poster !== "N/A") {
+
                 // Populate the web page with results
-                $("#results-div").append("<div class='results animated fadeInLeft'><img class='result-img' src='" + response.Search[i].Poster + "'><div class='movie-info'><h2>" + response.Search[i].Title + "</h2><h3>Year: " + response.Search[i].Year + "</h3><a href='#' class='watch-trailer' id='" + response.Search[i].imdbID + "' data-title='" + response.Search[i].Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.Search[i].imdbID + "' target='_blank'>Open on IMDb</a><button type='button' class='add-button' data-title='" + response.Search[i].Title + "' data-poster='" + response.Search[i].Poster + "' data-IMDb='" + response.Search[i].imdbID + "'>Add to Wish List</button></div></div>");
+                $("#results-div").append("<div class='results animated fadeIn'><img class='result-img' src='" + response.Search[i].Poster + "'><div class='movie-info'><h2>" + response.Search[i].Title + "</h2><h3>(" + response.Search[i].Year + ")</h3><a class='watch-trailer' id='" + response.Search[i].imdbID + "' data-title='" + response.Search[i].Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.Search[i].imdbID + "' target='_blank'>Open on IMDb</a><button type='button' class='add-button' data-title='" + response.Search[i].Title + "' data-poster='" + response.Search[i].Poster + "' data-IMDb='" + response.Search[i].imdbID + "'>Add to Wish List</button></div></div>");
+
+                }
 
             }
 
@@ -144,7 +150,7 @@ $(document).on("click", ".watch-trailer", function(){
             $("#video-background").show();
             $("#video-player").show();
             $("#video-player").html("<iframe width='853' height='480' src='https://www.youtube.com/embed/" + trailerResponse.results[0].key + "' frameborder='0' allowfullscreen></iframe>'");
-            $("#video-player").append("<button id='close-button' class='close-trailer'>✘</button>");
+            $("#video-player").append("<button id='close-button' class='close-trailer'><i class='fas fa-times'></i></button>");
         }
 
         else {
@@ -182,6 +188,8 @@ $(document).on("click", ".add-button", function(){
         IMDb: $(this).attr("data-IMDb")
   });
 
+  $("#wishlist-container").show();
+
 });
 
 // Define behavior when a checkbox button is clicked
@@ -198,7 +206,7 @@ $(document).on("click", ".checkbox", function() {
         snapshot.forEach(function(childSnapshot) {
           var childKey = childSnapshot.key;
           var csv = childSnapshot.val();
-         $("#wishlist-container").prepend("<div class='wishlist animated fadeIn'><a href='#'><img class='movie-wish' src='" + csv.poster + "' alt='" + csv.title + "' data-IMDb='" + csv.IMDb + "'></a><button class='checkbox' data-db-id='" + childKey + "'>✓</button>");
+         $("#wishlist-container").prepend("<div class='wishlist animated fadeIn'><a href='#'><img class='movie-wish' src='" + csv.poster + "' alt='" + csv.title + "' data-IMDb='" + csv.IMDb + "'></a><button class='checkbox' data-db-id='" + childKey + "'><i class='fas fa-check'></i></button>");
         });
     });
 
@@ -222,10 +230,24 @@ $(document).on("click", ".movie-wish", function() {
         }).then(function(response) {
 
         // Populate the web page with details on the clicked movie
-        $("#results-div").html("<div class='results animated bounceInRight'><img class='result-img' src='" + response.Poster + "'><div class='movie-info'><h2>" + response.Title + "</h2><h3>Year: " + response.Year + "</h3><a href='#' class='watch-trailer' id='" + response.imdbID + "' data-title='" + response.Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.imdbID + "' target='_blank'>Open on IMDb</a></div></div>");
+        $("#results-div").html("<div class='results animated bounceInRight'><img class='result-img' src='" + response.Poster + "'><div class='movie-info'><h2>" + response.Title + "</h2><h3>(" + response.Year + ")</h3><a href='#' class='watch-trailer' id='" + response.imdbID + "' data-title='" + response.Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.imdbID + "' target='_blank'>Open on IMDb</a></div></div>");
 
     });
 
 });
+
+// Some final touches for the main page
+
+$(document).on("click", "#home", function() {
+    $("#results-div").empty();
+});
+
+$(document).on("click", "#wishlist-toggle", function() {
+    $("#wishlist-container").toggle();
+});
+
+setTimeout(function() {
+    $("#footer-note").hide();
+}, 5000);
 
 });
