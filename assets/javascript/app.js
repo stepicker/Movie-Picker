@@ -19,6 +19,10 @@ var keys = {
 // Define global variable for the user
 var currentUser;
 
+// Define list of page backgrounds
+var backgrounds = ["bg1.jpg", "bg2.jpg", "bg3.jpg", "bg4.jpg"];
+var randomBackgroundNumber = Math.floor(Math.random() * 4);
+
 
 // USER AUTHENTICATION AND DATABASE
 // ==================================================
@@ -48,7 +52,6 @@ console.log("Authentication error code: " + error.code + ". Message: " + error.m
 firebase.auth().onAuthStateChanged(function(user) {
 
     currentUser = user.uid;
-    console.log("User authentication success. User ID: " + currentUser);
 
     // Get real-time updates from the database for the current user, and populate the Wish List accordingly
     database.ref(currentUser).on("child_added", function(snapshot) {
@@ -249,6 +252,8 @@ $(document).on("click", "#wishlist-toggle", function() {
     $("#wishlist-container").show();
     $("#wishlist-toggle").hide();
 });
+
+$("body").css("background-image", "url('./assets/images/" + backgrounds[randomBackgroundNumber] + "')");
 
 setTimeout(function() {
     $("#footer-note").hide();
