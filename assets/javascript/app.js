@@ -90,7 +90,7 @@ $("#search-movie").on("click", function(event) {
         $.ajax({
             url: "/.netlify/functions/omdb",
             // url: "http://localhost:9000/omdb",
-            method: "POST",
+            method: "GET",
             body: {movie: movie}
         }).then(function(response) {
     
