@@ -88,10 +88,11 @@ $("#search-movie").on("click", function(event) {
         var OMDBqueryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=" + keys.OMDb;
 
         fetch("/.netlify/functions/omdb", {
-                method: 'POST',
-                headers: new Headers(),
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({movie: movie})
-            }).then(function(response) {
+        })
+        .then(function(response) {
     
             console.log(response);
             
