@@ -89,8 +89,9 @@ $("#search-movie").on("click", function(event) {
 
         $.ajax({
             url: "/.netlify/functions/omdb",
+            // url: "http://localhost:9000/omdb",
             method: "POST",
-            movie: movie
+            body: {movie: movie}
         }).then(function(response) {
     
             console.log(response);
