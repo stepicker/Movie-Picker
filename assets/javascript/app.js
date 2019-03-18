@@ -88,7 +88,7 @@ $("#search-movie").on("click", function(event) {
         var OMDBqueryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=" + keys.OMDb;
 
         $.ajax({
-            url: "/.netlify/functions/omdb.js",
+            url: "/.netlify/functions/omdb",
             method: "POST",
             movie: movie
         }).then(function(response) {
