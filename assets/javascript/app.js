@@ -90,7 +90,7 @@ $("#search-movie").on("click", function(event) {
         fetch("/.netlify/functions/omdb", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({movie: movie})
+                body: JSON.stringify({"movie": movie})
         })
         .then(function(response) {
     
