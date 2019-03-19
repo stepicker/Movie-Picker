@@ -87,12 +87,12 @@ $("#search-movie").on("click", function(event) {
         // Use the OMDb API to get results
         var OMDBqueryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=" + keys.OMDb;
 
-        omdbLambdaUrl = "http://localhost:9000/omdb" || "/.netlify/functions/omdb";
+        omdbLambdaUrl = "/.netlify/functions/omdb";
 
         fetch(omdbLambdaUrl, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: {"movie": movie}
+                body: JSON.stringify({"movie": movie})
         })
         .then(function(response) {
     
