@@ -90,9 +90,9 @@ $("#search-movie").on("click", function(event) {
         omdbLambdaUrl = "http://localhost:9000/omdb" || "/.netlify/functions/omdb";
 
         fetch(omdbLambdaUrl, {
-                method: "GET",
+                method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({"movie": movie})
+                body: {"movie": movie}
         })
         .then(function(response) {
     
