@@ -2,4 +2,4 @@
 https://movie-picker.netlify.com/* https://movie.picker.it/:splat 301!
 
 # Redirect local API call for testing purposes
-/api/* https://movie.picker.it/.netlify/functions/:splat 200
+/api/* /.netlify/functions/:splat 200
