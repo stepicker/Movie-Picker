@@ -89,14 +89,13 @@ $("#search-movie").on("click", function(event) {
 
         var omdbLambdaUrl = "./api/omdb";
 
-        $.ajax({
-                url: omdbLambdaUrl,
+        fetch(omdbLambdaUrl, {
                 method: "POST",
+                mode: "no-cors",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({"movie": movie})
         })
-
-        .done(function(response) {
+        .then(function(response) {
     
             console.log(response);
             
