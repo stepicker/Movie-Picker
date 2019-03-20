@@ -93,7 +93,7 @@ $("#search-movie").on("click", function(event) {
                 url: omdbLambdaUrl,
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({"movie": movie})
+                body: {"movie": movie}
         })
 
         .done(function(response) {
