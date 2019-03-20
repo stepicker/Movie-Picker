@@ -89,12 +89,14 @@ $("#search-movie").on("click", function(event) {
 
         omdbLambdaUrl = "/.netlify/functions/omdb";
 
-        fetch(omdbLambdaUrl, {
+        $.ajax({
+                url: OMDBqueryURL,
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({"movie": movie})
         })
-        .then(function(response) {
+        
+        .done(function(response) {
     
             console.log(response);
             
