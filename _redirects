@@ -1,5 +1,5 @@
 # Redirect default Netlify subdomain to primary domain
 https://movie-picker.netlify.com/* https://movie.picker.it/:splat 301!
 
-# Redirect local API call for testing purposes
+# Redirect API call
 /api/* /.netlify/functions/:splat 200

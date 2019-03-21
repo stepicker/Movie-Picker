@@ -89,14 +89,16 @@ $("#search-movie").on("click", function(event) {
 
         var omdbLambdaUrl = "./api/omdb";
 
-        fetch(omdbLambdaUrl, {
+        async function omdbFetch() {
+
+            const res = await fetch(omdbLambdaUrl, {
                 method: "POST",
-                mode: "no-cors",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({"movie": movie})
-        })
-        .then(function(response) {
-    
+            });
+
+            const response = await res.json();
+        
             console.log(response);
             
             $("#results-div").empty();
@@ -122,7 +124,9 @@ $("#search-movie").on("click", function(event) {
 
             }
 
-        });
+        }
+
+        omdbFetch(omdbLambdaUrl, movie);
 
     }
 
