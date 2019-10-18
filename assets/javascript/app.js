@@ -12,8 +12,7 @@ $("#wishlist-container").hide();
 // Hold the keys for APIs and database
 var keys = {
     OMDb: "trilogy",
-    TMDb: "ee00799d9647027160a387c172fcee51",
-    firebase: "AIzaSyCN1PSw8wmS16qrwUA66gSDcBl0cQuv7JE"
+    TMDb: "ee00799d9647027160a387c172fcee51"
 };
 
 // Define global variable for the user
@@ -29,7 +28,7 @@ var randomBackgroundNumber = Math.floor(Math.random() * 4);
 
 // Firebase configuration    
 var config = {
-    apiKey: keys.firebase,
+    apiKey: "AIzaSyCN1PSw8wmS16qrwUA66gSDcBl0cQuv7JE",
     authDomain: "movie-wish-list-v2.firebaseapp.com",
     databaseURL: "https://movie-wish-list-v2.firebaseio.com",
     projectId: "movie-wish-list-v2",
@@ -85,11 +84,9 @@ $("#search-movie").on("click", function(event) {
     else {
 
         // Use the OMDb API to get results
-        var OMDBqueryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=" + keys.OMDb;
-
         var omdbLambdaUrl = "./api/omdb";
 
-        async function omdbFetch() {
+        async function omdbFetch(omdbLambdaUrl, movie) {
 
             const res = await fetch(omdbLambdaUrl, {
                 method: "POST",

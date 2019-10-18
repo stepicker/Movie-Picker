@@ -145,7 +145,7 @@ a {
 }
 
 #wishlist-container {
-    flex: 1;
+    flex: 2;
     background-image: url("../images/darkmosaic.png");
     border-left: 2px solid lightgray;
     border-bottom: 2px solid lightgray;
