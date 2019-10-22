@@ -83,47 +83,53 @@ $("#search-movie").on("click", function(event) {
 
     else {
 
-        // Use the OMDb API to get results
-        var omdbLambdaUrl = "./api/omdb";
+        // Use the API to get results
+        var omdbLambdaUrl = "https://7f5zweab5h.execute-api.us-east-1.amazonaws.com/dev/omdb/";
 
-        async function omdbFetch(omdbLambdaUrl, movie) {
+        function omdbFetch() {
 
-            const res = await fetch(omdbLambdaUrl, {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({"movie": movie})
-            });
+            fetch(omdbLambdaUrl, {  
+                method: 'POST',  
+                headers: {"Content-Type": "application/json"},  
+                body: JSON.stringify({
+                movie: movie
+                })
+            })
+            .then(async res => {
 
-            const response = await res.json();
-        
-            console.log(response);
-            
-            $("#results-div").empty();
+                const movieData = await res.json();
 
-            var maxResults;
+                $("#results-div").empty();
 
-            if (response.Search.length > 10) {
-                maxResults = 10;
-            }
+                var maxResults;
 
-            else {
-                maxResults = response.Search.length;
-            }
+                if (movieData.length > 10) {
+                    maxResults = 10;
+                }
 
-            for (i = 0; i < maxResults; i++) {
+                else {
+                    maxResults = movieData.length;
+                }
 
-                if (response.Search[i].Poster !== "N/A") {
+                for (i = 0; i < maxResults; i++) {
 
-                // Populate the web page with results
-                $("#results-div").append("<div class='results animated fadeIn'><img class='result-img' src='" + response.Search[i].Poster + "'><div class='movie-info'><h2>" + response.Search[i].Title + "</h2><h3>(" + response.Search[i].Year + ")</h3><a class='watch-trailer' id='" + response.Search[i].imdbID + "' data-title='" + response.Search[i].Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.Search[i].imdbID + "' target='_blank'>Open on IMDb</a><button type='button' class='add-button' data-title='" + response.Search[i].Title + "' data-poster='" + response.Search[i].Poster + "' data-IMDb='" + response.Search[i].imdbID + "'>Add to Wish List</button></div></div>");
+                    if (movieData[i].Poster !== "N/A") {
+
+                    // Populate the web page with results
+                    $("#results-div").append("<div class='results animated fadeIn'><img class='result-img' src='" + movieData[i].Poster + "'><div class='movie-info'><h2>" + movieData[i].Title + "</h2><h3>(" + movieData[i].Year + ")</h3><a class='watch-trailer' id='" + movieData[i].imdbID + "' data-title='" + movieData[i].Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + movieData[i].imdbID + "' target='_blank'>Open on IMDb</a><button type='button' class='add-button' data-title='" + movieData[i].Title + "' data-poster='" + movieData[i].Poster + "' data-IMDb='" + movieData[i].imdbID + "'>Add to Wish List</button></div></div>");
+
+                    }
 
                 }
 
-            }
+            })
+            .catch(error => {  
+              console.log('Request failure: ', error);  
+            });
 
         }
 
-        omdbFetch(omdbLambdaUrl, movie);
+        omdbFetch();
 
     }
 
@@ -146,7 +152,7 @@ $(document).on("click", ".watch-trailer", function(){
             text: "There is no trailer available for \"" + clickedMovieTitle + "\"",
             icon: "error",
             });
-    }
+    };
 
     $.ajax({
         url: MDBqueryURL,
