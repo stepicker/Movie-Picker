@@ -84,20 +84,19 @@ $("#search-movie").on("click", function(event) {
     else {
 
         // Use the API to get results
-        var omdbLambdaUrl = "https://7f5zweab5h.execute-api.us-east-1.amazonaws.com/dev/omdb/";
+        var omdbLambdaUrl = "https://4cd8jhigqg.execute-api.us-east-1.amazonaws.com/dev/omdb";
 
         function omdbFetch() {
 
             fetch(omdbLambdaUrl, {  
                 method: 'POST',  
                 headers: {"Content-Type": "application/json"},  
-                body: JSON.stringify({
-                movie: movie
-                })
+                body: JSON.stringify({movie: movie})
             })
             .then(async res => {
 
-                const movieData = await res.json();
+                var movieData = await res.json();
+                console.log(movieData);
 
                 $("#results-div").empty();
 
