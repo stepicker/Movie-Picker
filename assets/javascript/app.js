@@ -141,9 +141,6 @@ $(document).on("click", ".watch-trailer", function(){
     var clickedID = $(this).attr("id");
     var clickedMovieTitle = $(this).attr("data-title");
 
-    // Use the MovieDB API to add trailers to each result
-    var MDBqueryURL = "https://api.themoviedb.org/3/movie/" + clickedID + "/videos?api_key=" + keys.TMDb;
-
     // Return error message if the movie has no trailer available
     function trailerError() {
         swal({
@@ -153,33 +150,40 @@ $(document).on("click", ".watch-trailer", function(){
             });
     };
 
-    $.ajax({
-        url: MDBqueryURL,
-        method: "GET"
-    })
+    // Use the API to get results
+    var mdbLambdaUrl = "https://4cd8jhigqg.execute-api.us-east-1.amazonaws.com/dev/mdb";
 
-    .done(function(trailerResponse) {
+    function mdbFetch() {
 
-        if (trailerResponse.results.length > 0) {
-            $("#video-background").show();
-            $("#video-player").show();
-            $("#video-player").html("<iframe width='853' height='480' src='https://www.youtube.com/embed/" + trailerResponse.results[0].key + "' frameborder='0' allowfullscreen></iframe>'");
-            $("#video-player").append("<button id='close-button' class='close-trailer'><i class='fas fa-times'></i></button>");
-        }
+        fetch(mdbLambdaUrl, {  
+            method: 'POST',  
+            headers: {"Content-Type": "application/json"},  
+            body: JSON.stringify({movieID: clickedID})
+        })
+        .then(async res => {
 
-        else {
-            trailerError();
-        }
-        
-    })
+            var trailerResponse = await res.json();
+            console.log(trailerResponse);
 
-    .fail(function() {
-        trailerError();
-    })
+            if (trailerResponse.results.length > 0) {
+                $("#video-background").show();
+                $("#video-player").show();
+                $("#video-player").html("<iframe width='853' height='480' src='https://www.youtube.com/embed/" + trailerResponse.results[0].key + "' frameborder='0' allowfullscreen></iframe>'");
+                $("#video-player").append("<button id='close-button' class='close-trailer'><i class='fas fa-times'></i></button>");
+            }
+    
+            else {
+                trailerError();
+            }
 
-    .always(function(trailerResponse) {
-        console.log(trailerResponse);
-    });
+        })
+        .catch(error => {  
+            console.log('Request failure: ', error);  
+        });
+
+    }
+
+    mdbFetch();
 
 });
 
