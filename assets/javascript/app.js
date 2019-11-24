@@ -9,12 +9,6 @@ $("#wishlist-container").hide();
 // GLOBAL VARIABLES
 // ==================================================
 
-// Hold the keys for APIs and database
-var keys = {
-    OMDb: "trilogy",
-    TMDb: "ee00799d9647027160a387c172fcee51"
-};
-
 // Define global variable for the user
 var currentUser;
 
