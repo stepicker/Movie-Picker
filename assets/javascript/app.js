@@ -59,7 +59,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 // USER-TRIGGERED BEHAVIORS
 // ==================================================
 
-// Capture user input and show search results
+// Capture user input and show search results from OMDB
 $("#search-movie").on("click", function(event) {
 
     event.preventDefault();
@@ -135,7 +135,7 @@ $(document).on("click", ".watch-trailer", function(){
     var clickedID = $(this).attr("id");
     var clickedMovieTitle = $(this).attr("data-title");
 
-    // Return error message if the movie has no trailer available
+    // Function to return error message if the movie has no trailer available
     function trailerError() {
         swal({
             title: "Sorry!",
