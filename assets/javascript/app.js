@@ -225,29 +225,6 @@ $(document).on("click", ".checkbox", function() {
 
 });
 
-// Define behavior when a wishlist movie poster is clicked
-$(document).on("click", ".movie-wish", function() {
-
-    var clickedMovieId = $(this).attr("data-IMDb");
-    console.log("Clicked Movie ID: " + clickedMovieId);
-
-    // Add on-click animation
-    $(this).addClass("animated pulse");
-
-    // Use the OMDb API to get results
-    var OMDBqueryURL = "https://www.omdbapi.com/?i=" + clickedMovieId + "&apikey=" + keys.OMDb;
-
-    $.ajax({
-        url: OMDBqueryURL,
-        method: "GET"
-        }).then(function(response) {
-
-        // Populate the web page with details on the clicked movie
-        $("#results-div").html("<div class='results animated bounceInRight'><img class='result-img' src='" + response.Poster + "'><div class='movie-info'><h2>" + response.Title + "</h2><h3>(" + response.Year + ")</h3><a href='#' class='watch-trailer' id='" + response.imdbID + "' data-title='" + response.Title + "'>Watch Trailer</a><a href='https://www.imdb.com/title/" + response.imdbID + "' target='_blank'>Open on IMDb</a></div></div>");
-
-    });
-
-});
 
 // Some final touches for the main page
 
