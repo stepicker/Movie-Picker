@@ -8,4 +8,6 @@ Personal project, leveraging:
 
 ## Ready to try it?
 
-Here's the [deployed version](https://movie-picker.netlify.com/)
+Here's the [deployed version](https://movie-picker.netlify.com/) of this code
+
+And here's a [newer version](https://movie.picker.tech/) I developed with React / AWS
