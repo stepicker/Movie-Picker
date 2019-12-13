@@ -8,4 +8,4 @@ Personal project, leveraging:
 
 ## Ready to try it?
 
-Here's the [deployed version](https://movie.picker.it/)
+Here's the [deployed version](https://movie-picker.netlify.com/)
