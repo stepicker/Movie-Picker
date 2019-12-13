@@ -219,14 +219,14 @@ $(document).on("click", ".checkbox", function() {
         snapshot.forEach(function(childSnapshot) {
           var childKey = childSnapshot.key;
           var csv = childSnapshot.val();
-         $("#wishlist-container").prepend("<div class='wishlist animated fadeIn'><a href='#'><img class='movie-wish' src='" + csv.poster + "' alt='" + csv.title + "' data-IMDb='" + csv.IMDb + "'></a><button class='checkbox' data-db-id='" + childKey + "'><i class='fas fa-check'></i></button>");
+         $("#wishlist-container").prepend("<div class='wishlist animated fadeIn'><img class='movie-wish' src='" + csv.poster + "' alt='" + csv.title + "' data-IMDb='" + csv.IMDb + "'><button class='checkbox' data-db-id='" + childKey + "'><i class='fas fa-check'></i></button>");
         });
     });
 
 });
 
 
-// Some final touches for the main page
+// Some final touches to the main page
 
 $(document).on("click", "#home", function() {
     $("#results-div").empty();
