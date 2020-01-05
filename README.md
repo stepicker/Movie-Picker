@@ -10,4 +10,4 @@ Personal project, leveraging:
 
 Here's the [deployed version](https://movie-picker.netlify.com/) of this code
 
-And here's a [newer version](https://movie.picker.tech/) I developed with React / AWS
+And here's a [newer version](https://movie.picker.tech/) I developed with React, using AWS Cognito / API Gateway / Lambda / DynamoDB
